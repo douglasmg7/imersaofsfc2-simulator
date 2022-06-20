@@ -41,25 +41,21 @@ func (r *Route) LoadPositions() error {
 
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
-		fmt.Println("scanner-3")
 		data := strings.Split(scanner.Text(), ",")
-		fmt.Println("data:", data)
+		// fmt.Println("data:", data)
 		lat, err := strconv.ParseFloat(data[0], 64)
-		fmt.Println("scanner-4")
 		if err != nil {
 			return err
 		}
-		fmt.Println("scanner-5")
 		long, err := strconv.ParseFloat(data[1], 64)
 		if err != nil {
+			fmt.Println("error:", err.Error())
 			return err
 		}
-		fmt.Println("scanner-6")
 		r.Positions = append(r.Positions, Position{
 			Lat:  lat,
 			Long: long,
 		})
-		fmt.Println("scanner-7")
 	}
 	return nil
 }
